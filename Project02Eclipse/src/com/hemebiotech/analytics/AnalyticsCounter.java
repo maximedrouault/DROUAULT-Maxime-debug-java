@@ -8,7 +8,7 @@ public class AnalyticsCounter {
 	private static int headAcheCount = 0;
 	private static int rashCount = 0;
 	private static int pupilCount = 0;
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader reader = new BufferedReader (new FileReader(".\\Project02Eclipse\\symptoms.txt"));
 		String line = reader.readLine();
