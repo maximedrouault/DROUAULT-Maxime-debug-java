@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 	/**
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 *  filepath a full or partial path to file with symptom strings in it, one per line
 	 */
-	private Path symptomsFilePath;
+	private final Path symptomsFilePath;
 
 	public ReadSymptomDataFromFile (Path symptomsFilePath) {
 		this.symptomsFilePath = symptomsFilePath;
@@ -23,12 +23,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	public List<String> getSymptoms() {
 		List<String> symptoms = new ArrayList<>();
 
-		// Lecture de toutes les lignes de "SYMPTOMS.TXT"
+		// Reading all lines of "SYMPTOMS.TXT"
 		if (symptomsFilePath != null) {
 			try {
 				symptoms = Files.readAllLines(symptomsFilePath);
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 			}
 		}
 		

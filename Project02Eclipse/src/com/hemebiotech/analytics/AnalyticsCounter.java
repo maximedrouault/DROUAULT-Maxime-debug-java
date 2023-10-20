@@ -1,39 +1,36 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
-	private static int headAcheCount = 0;
-	private static int rashCount = 0;
-	private static int pupilCount = 0;
 
-	public static void main(String[] args) throws Exception {
-		BufferedReader reader = new BufferedReader (new FileReader(".\\Project02Eclipse\\symptoms.txt"));
-		String line = reader.readLine();
+	private final ISymptomReader symptomReader;
+	private final ISymptomWriter symptomWriter;
 
-		while (line != null) {
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headAcheCount++;
-				System.out.println("number of headaches: " + headAcheCount);
-			}
-			else if (line.equals("rash")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
+	// AnalyticsCounter constructor.
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+		this.symptomReader = reader;
+		this.symptomWriter = writer;
+	}
 
-			line = reader.readLine();
+	// Retrieves the list of symptoms from the data source.
+	public List<String> getSymptoms() {
+		return symptomReader.getSymptoms();
+	}
+
+	// Counting and triaging symptoms.
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
+		Map<String, Integer> symptomCountTreeMap = new TreeMap<>();
+		for (String symptom : symptoms) {
+			symptomCountTreeMap.put(symptom, symptomCountTreeMap.getOrDefault(symptom, 0) + 1);
 		}
-		reader.close();
+		return symptomCountTreeMap;
+	}
 
-		FileWriter writer = new FileWriter (".\\Project02Eclipse\\result.out");
-		writer.write("headache: " + headAcheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dilated pupils: " + pupilCount + "\n");
-		writer.close();
+	// Saves the results to the output file.
+	public void writeSymptoms(Map<String, Integer> symptoms) {
+		symptomWriter.writeSymptoms(symptoms);
 	}
 }

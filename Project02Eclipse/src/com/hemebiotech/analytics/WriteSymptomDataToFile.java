@@ -12,9 +12,9 @@ import java.util.Map;
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {
 	/**
-	 * @param resultFilePath a full or partial path to file with regrouped and counted symptoms strings in it, one per line
+	 * resultFilePath a full or partial path to file with regrouped and counted symptoms strings in it, one per line
 	 */
-	private Path resultFilePath;
+	private final Path resultFilePath;
 
 	public WriteSymptomDataToFile(Path resultFilePath) {
 		this.resultFilePath = resultFilePath;
@@ -25,16 +25,16 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 
 		if (resultFilePath != null) {
 			try {
-				// Création de la liste des lignes à écrire au bon format.
+				// Creation of the list of lines to write in the correct format.
 				List<String> lines = new ArrayList<>();
 
 				for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
 					lines.add(entry.getKey() + " : " + entry.getValue());
 				}
-				// Enregistrement dans le fichier "resul.out"
+				// Saving in the "result.out" file.
 				Files.write(resultFilePath, lines);
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println(e.getMessage());
 			}
 		}
 	}
