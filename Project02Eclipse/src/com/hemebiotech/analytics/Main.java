@@ -2,6 +2,9 @@ package com.hemebiotech.analytics;
 
 import java.nio.file.Path;
 
+/**
+ * The Main class is the entry point for the symptom data processing application.
+ */
 public class Main {
 
     public static void main(String[] args) {

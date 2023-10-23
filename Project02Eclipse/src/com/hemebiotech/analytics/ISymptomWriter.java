@@ -3,10 +3,11 @@ package com.hemebiotech.analytics;
 import java.util.Map;
 
 /**
- * Anything that will write symptom data to a destination
- * The important part is, the operation's return value, which is a Map of strings and integers.
- * */
+ * This interface represents anything that can write symptom data to a destination.
+ * The critical aspect of this operation is the return value, which is a Map of strings and integers.
+ */
 public interface ISymptomWriter {
+
 	/**
 	 * Writes symptom data to a destination.
 	 *
