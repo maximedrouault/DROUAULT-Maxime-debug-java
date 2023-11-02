@@ -1,5 +1,7 @@
 package com.hemebiotech.analytics;
 
+import java.util.List;
+import java.util.Map;
 import java.nio.file.Path;
 
 /**
@@ -16,7 +18,11 @@ public class Main {
         // Instantiating AnalyticsCounter
         AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
 
-        // Execution of the different stages of processing
-        analyticsCounter.writeSymptoms(analyticsCounter.countSymptoms(analyticsCounter.getSymptoms()));
+        // Get the symptoms from source file.
+        List<String> symptoms = analyticsCounter.getSymptoms();
+        // Count, group and sort symptoms.
+        Map<String, Integer> symptomCounts = analyticsCounter.countSymptoms(symptoms);
+        // Write the symptoms and their counts to result file.
+        analyticsCounter.writeSymptoms(symptomCounts);
     }
 }
